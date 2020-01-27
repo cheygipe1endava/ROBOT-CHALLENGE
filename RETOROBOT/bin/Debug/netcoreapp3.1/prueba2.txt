@@ -1,0 +1,16 @@
+Big Apple
+Machu Picchu
+Usaquen
+Cali
+Bogota
+Baru
+Cartagena
+Medellin
+
+Big Apple,Bogota,7
+Big Apple,Cali,4
+Big Apple,Machu Picchu,2
+Machu Picchu,Usaquen,4
+Usaquen,Cali,2
+Usaquen,Baru,5
+Baru,Medellin,5

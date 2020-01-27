@@ -1,0 +1,22 @@
+C:\Users\fgiraldo\OneDrive - ENDAVA\Desktop\RETOROBOT\RETOROBOT\bin\Debug\netcoreapp3.1\RETOROBOT.exe
+C:\Users\fgiraldo\OneDrive - ENDAVA\Desktop\RETOROBOT\RETOROBOT\bin\Debug\netcoreapp3.1\RETOROBOT.deps.json
+C:\Users\fgiraldo\OneDrive - ENDAVA\Desktop\RETOROBOT\RETOROBOT\bin\Debug\netcoreapp3.1\RETOROBOT.runtimeconfig.json
+C:\Users\fgiraldo\OneDrive - ENDAVA\Desktop\RETOROBOT\RETOROBOT\bin\Debug\netcoreapp3.1\RETOROBOT.runtimeconfig.dev.json
+C:\Users\fgiraldo\OneDrive - ENDAVA\Desktop\RETOROBOT\RETOROBOT\bin\Debug\netcoreapp3.1\RETOROBOT.dll
+C:\Users\fgiraldo\OneDrive - ENDAVA\Desktop\RETOROBOT\RETOROBOT\bin\Debug\netcoreapp3.1\RETOROBOT.pdb
+C:\Users\fgiraldo\OneDrive - ENDAVA\Desktop\RETOROBOT\RETOROBOT\obj\Debug\netcoreapp3.1\RETOROBOT.csprojAssemblyReference.cache
+C:\Users\fgiraldo\OneDrive - ENDAVA\Desktop\RETOROBOT\RETOROBOT\obj\Debug\netcoreapp3.1\RETOROBOT.AssemblyInfoInputs.cache
+C:\Users\fgiraldo\OneDrive - ENDAVA\Desktop\RETOROBOT\RETOROBOT\obj\Debug\netcoreapp3.1\RETOROBOT.AssemblyInfo.cs
+C:\Users\fgiraldo\OneDrive - ENDAVA\Desktop\RETOROBOT\RETOROBOT\obj\Debug\netcoreapp3.1\RETOROBOT.dll
+C:\Users\fgiraldo\OneDrive - ENDAVA\Desktop\RETOROBOT\RETOROBOT\obj\Debug\netcoreapp3.1\RETOROBOT.pdb
+C:\Users\user\Desktop\DOWNLOADED\RETOROBOT\bin\Debug\netcoreapp3.1\RETOROBOT.exe
+C:\Users\user\Desktop\DOWNLOADED\RETOROBOT\bin\Debug\netcoreapp3.1\RETOROBOT.deps.json
+C:\Users\user\Desktop\DOWNLOADED\RETOROBOT\bin\Debug\netcoreapp3.1\RETOROBOT.runtimeconfig.json
+C:\Users\user\Desktop\DOWNLOADED\RETOROBOT\bin\Debug\netcoreapp3.1\RETOROBOT.runtimeconfig.dev.json
+C:\Users\user\Desktop\DOWNLOADED\RETOROBOT\bin\Debug\netcoreapp3.1\RETOROBOT.dll
+C:\Users\user\Desktop\DOWNLOADED\RETOROBOT\bin\Debug\netcoreapp3.1\RETOROBOT.pdb
+C:\Users\user\Desktop\DOWNLOADED\RETOROBOT\obj\Debug\netcoreapp3.1\RETOROBOT.csprojAssemblyReference.cache
+C:\Users\user\Desktop\DOWNLOADED\RETOROBOT\obj\Debug\netcoreapp3.1\RETOROBOT.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\DOWNLOADED\RETOROBOT\obj\Debug\netcoreapp3.1\RETOROBOT.AssemblyInfo.cs
+C:\Users\user\Desktop\DOWNLOADED\RETOROBOT\obj\Debug\netcoreapp3.1\RETOROBOT.dll
+C:\Users\user\Desktop\DOWNLOADED\RETOROBOT\obj\Debug\netcoreapp3.1\RETOROBOT.pdb
