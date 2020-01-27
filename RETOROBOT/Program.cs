@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections;
 using System.IO; //FIN THE TEXT FILE
 using System.IO.Compression;
+using System.Linq;
 
 
 namespace APLICACION_ROBOT
@@ -201,6 +202,61 @@ namespace APLICACION_ROBOT
                 }
             }
 
+            string[] NodoDisconexo = new string[z];
+
+            
+            for (i = 0; i < z; i++)
+            {
+                for (j = 0; j < z3; j++)
+                {
+                    if(NodoDisconexo.Contains(Edges[j,0]))
+                    {
+                        //Console.WriteLine("YA EXISTE");
+                    }
+                    else
+                    {
+                        NodoDisconexo[i] = Edges[j, 0];
+                        //Console.WriteLine("NO EXISTE");
+                    }
+                    if (NodoDisconexo.Contains(Edges[j, 1]))
+                    {
+                        //Console.WriteLine("YA EXISTE");
+                    }
+                    else
+                    {
+                        NodoDisconexo[i] = Edges[j, 1];
+                        //Console.WriteLine("NO EXISTE");
+                    }
+                }
+            }
+
+            for (i = 0; i < z; i++)
+            {
+                if(!NodoDisconexo.Contains(NodeList[i]))
+                {
+                    for (j = 0; j < z; j++) 
+                    {
+                        WeightMatrix[i, j] = -10;
+                        WeightMatrix[j, i] = -10;
+                        
+                        //Console.Write(WeightMatrix[i, j] + "\t");
+                    }
+                    //Console.WriteLine(NodeList[i] + " NO TIENE CONEXIONES");
+                }
+                else
+                {
+
+                }
+            }
+
+
+            /*
+            for (i = 0; i < z; i++) 
+            {
+                Console.WriteLine(NodoDisconexo[i]);
+            }
+            */
+
             for (i = 0; i < z; i++)//WEIGHTED MATRIX PRINT 
             {
                 for (j = 0; j < z; j++) 
@@ -218,9 +274,12 @@ namespace APLICACION_ROBOT
                         Console.ForegroundColor = ConsoleColor.Blue;
                         //Console.Write(WeightMatrix[i, j] + "\t");
                     }
-                    else
+                    else if (WeightMatrix[i, j] == -10)
                     {
-                        
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+                    else
+                    {                        
                         Console.ForegroundColor = ConsoleColor.Green;
                     }
                     Console.BackgroundColor = ConsoleColor.Black;
@@ -229,6 +288,13 @@ namespace APLICACION_ROBOT
                 //Console.WriteLine();
                 Console.WriteLine(Environment.NewLine);
             }
+            
+            
+            
+
+            
+
+
 
         }
 
