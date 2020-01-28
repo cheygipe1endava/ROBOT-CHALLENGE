@@ -4,7 +4,7 @@ using System.Collections;
 using System.IO; //FIN THE TEXT FILE
 using System.IO.Compression;
 using System.Linq;
-
+using System.Collections.Generic;
 
 namespace APLICACION_ROBOT
 {
@@ -128,12 +128,14 @@ namespace APLICACION_ROBOT
             }
 
             string[] NodeList = new string[z];
+            int[] NodeList2 = new int[z];
 
 
             for (h = 0; h < z; h++)//FILL ARRAY WITH ONLY THE NODES
             {
 
                 NodeList[h] = words[h];
+                NodeList2[h] = h;
                 //Console.WriteLine(NodeList[h]);
 
             }
@@ -235,8 +237,8 @@ namespace APLICACION_ROBOT
                 {
                     for (j = 0; j < z; j++)
                     {
-                        WeightMatrix[i, j] = 900;
-                        WeightMatrix[j, i] = 900;
+                        WeightMatrix[i, j] = int.MaxValue;
+                        WeightMatrix[j, i] = int.MaxValue;
 
                         //Console.Write(WeightMatrix[i, j] + "\t");
                     }
@@ -269,11 +271,11 @@ namespace APLICACION_ROBOT
                     }
                     else if (WeightMatrix[i, j] == 0)
                     {
-                        WeightMatrix[i, j] = 800;
+                        WeightMatrix[i, j] = int.MaxValue;
                         Console.ForegroundColor = ConsoleColor.Blue;
-                        //Console.Write(WeightMatrix[i, j] + "\t");
+                        //Console.Write("\t");
                     }
-                    else if (WeightMatrix[i, j] == 900)
+                    else if (WeightMatrix[i, j] == int.MaxValue)
                     {
                         Console.ForegroundColor = ConsoleColor.Gray;
                     }
@@ -380,7 +382,6 @@ namespace APLICACION_ROBOT
 
             Console.WriteLine("PESO TOTAL: " + TotalWeight + " ");
             */
-
         }
 
 
