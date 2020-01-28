@@ -1,21 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\Desktop\\DOWNLOADED\\RETOROBOT\\RETOROBOT.csproj": {}
+    "C:\\Users\\fgiraldo\\OneDrive - ENDAVA\\Desktop\\ROBO1\\ROBOT-CHALLENGE\\RETOROBOT\\RETOROBOT.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\Desktop\\DOWNLOADED\\RETOROBOT\\RETOROBOT.csproj": {
+    "C:\\Users\\fgiraldo\\OneDrive - ENDAVA\\Desktop\\ROBO1\\ROBOT-CHALLENGE\\RETOROBOT\\RETOROBOT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Desktop\\DOWNLOADED\\RETOROBOT\\RETOROBOT.csproj",
+        "projectUniqueName": "C:\\Users\\fgiraldo\\OneDrive - ENDAVA\\Desktop\\ROBO1\\ROBOT-CHALLENGE\\RETOROBOT\\RETOROBOT.csproj",
         "projectName": "RETOROBOT",
-        "projectPath": "C:\\Users\\user\\Desktop\\DOWNLOADED\\RETOROBOT\\RETOROBOT.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Desktop\\DOWNLOADED\\RETOROBOT\\obj\\",
+        "projectPath": "C:\\Users\\fgiraldo\\OneDrive - ENDAVA\\Desktop\\ROBO1\\ROBOT-CHALLENGE\\RETOROBOT\\RETOROBOT.csproj",
+        "packagesPath": "C:\\Users\\fgiraldo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\fgiraldo\\OneDrive - ENDAVA\\Desktop\\ROBO1\\ROBOT-CHALLENGE\\RETOROBOT\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\fgiraldo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"

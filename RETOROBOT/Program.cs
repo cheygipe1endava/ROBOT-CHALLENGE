@@ -5,7 +5,7 @@ using System.IO; //FIN THE TEXT FILE
 using System.IO.Compression;
 
 
-namespace APLICACION_ROBOT
+namespace ROBOT_APP
 {
     public static class Program
     {
@@ -230,9 +230,36 @@ namespace APLICACION_ROBOT
                 Console.WriteLine(Environment.NewLine);
             }
 
+
+
+            //---------------------------------PRIM ALGORITHM---------------------------------------
+
+            string[] VisitedNodes = new string[z];
+            int InputValue = Convert.ToInt32(Console.ReadLine());
+            int minvalue = 0;
+            minvalue = WeightMatrix[InputValue, 0];
+
+            for (i = 1; i < z; i++)
+            {
+
+                if (minvalue >= WeightMatrix[InputValue, i] && WeightMatrix[InputValue, i] > 0 && WeightMatrix[InputValue, i] < 800)
+                {
+                    minvalue = WeightMatrix[InputValue, i];
+                }
+                else
+                {
+
+                }
+
+
+            }
+
+            Console.WriteLine("VALOR MINIMO: " + minvalue);
+
         }
+
+    }
 
 
 
     }
-}
