@@ -292,27 +292,94 @@ namespace APLICACION_ROBOT
 
             //---------------------------------PRIM ALGORITHM---------------------------------------
 
-            string[] VisitedNodes = new string[z];
-            int N1 = Convert.ToInt32(Console.ReadLine());
-            int minvalue = 0;
-            minvalue = WeightMatrix[N1, 0];
+            int MinValue = 0, TotalWeight = 0, NodeCount = 1;
+            int InputNode = Convert.ToInt32(Console.ReadLine());
+            int[] VisitedNodes = new int[z * 2];
 
-            for (i = 1; i < z; i++)
+            for (i = 0; i < z * 2; i++)
             {
-
-                if (minvalue >= WeightMatrix[N1, i] && WeightMatrix[N1, i] > 0 && WeightMatrix[N1, i] < 800)
-                {
-                    minvalue = WeightMatrix[N1, i];
-                }
-                else
-                {
-
-                }
-
-
+                VisitedNodes[i] = int.MinValue;
             }
 
-            Console.WriteLine("VALOR MINIMO: " + minvalue);
+            VisitedNodes[0] = InputNode;
+            MinValue = int.MaxValue;
+
+            /*
+            if (VisitedNodes.Any(r => r > 0)) 
+            {
+                Console.WriteLine("HAY POSITIVOS");
+            }
+            else
+            {
+                Console.WriteLine("NO HAY POSITIVOS");
+            }
+            */
+
+            IEnumerable<int> Intersection = NodeList2.Intersect(VisitedNodes);
+
+            while (NodeList2 != Intersection)
+            {
+                if (VisitedNodes.Any(r => r > 0))
+                {
+
+                }
+                else//IF THERE'S NOT ANY POSITIVE NUMBERS IN VisitedNodes, START RUNNING FROM CERO
+                {
+
+                    for (i = 0; i < z; i++)
+                    {
+
+                        if (MinValue > WeightMatrix[InputNode, i] && WeightMatrix[InputNode, i] > 0)
+                        {
+                            MinValue = WeightMatrix[InputNode, i];
+                            VisitedNodes[NodeCount] = i;
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    TotalWeight = TotalWeight + MinValue;
+                    NodeCount++;
+                    MinValue = int.MaxValue;
+
+                    for (j = 0; j < z; j++)
+                    {
+                        if (MinValue > WeightMatrix[j, VisitedNodes[NodeCount - 1]] && WeightMatrix[j, VisitedNodes[NodeCount - 1]] > 0)
+                        {
+                            if (!VisitedNodes.Contains(j))
+                            {
+                                MinValue = WeightMatrix[j, VisitedNodes[NodeCount - 1]];
+                                VisitedNodes[NodeCount] = j;
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    TotalWeight = TotalWeight + MinValue;
+                    NodeCount++;
+                    MinValue = int.MaxValue;
+                }
+            }
+
+
+
+
+
+            /*
+            foreach(int numero in VisitedNodes)
+            {
+                Console.WriteLine(numero);
+            }
+
+            Console.WriteLine("PESO TOTAL: " + TotalWeight + " ");
+            */
 
         }
 
