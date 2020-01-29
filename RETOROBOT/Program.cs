@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Collections;
-using System.IO; //FIN THE TEXT FILE
+using System.IO; //FIND THE TEXT FILE
 using System.IO.Compression;
 using System.Linq;
 
@@ -10,22 +10,12 @@ namespace ROBOT_APP
 {
     public static class Program
     {
-        public const int inf = 9999;
-        public const int Vertices = 4;
+        
 
         static void Main(string[] args)
         {
 
-            int[,] grafo =
-                    {
-                        {0, 9, inf, 10},
-                        {inf, 0, 7, inf},
-                        {14, inf, 0, 11},
-                        {inf, inf, inf, 0}
-                    };
-
-            //MetPrincipal(grafo);            
-            InputProcess();
+            WeightMatrix();
             Console.ReadKey();
 
         }
@@ -33,93 +23,30 @@ namespace ROBOT_APP
 
 
 
-
-        static void MetPrincipal(int[,] grafo)
+        public static string ReadingText()
         {
-            int[,] distancia = new int[Vertices, Vertices];
-            int inicio = 0;
-            int mitad = 0;
-            int final = 0;
-            int i = 0;
-            int j = 0;
-
-            //IGUALATION FOR BOTH MATRIX
-            for (i = 0; i < Vertices; i++)
-            {
-                for (j = 0; j < Vertices; j++)
-                {
-                    distancia[i, j] = grafo[i, j];
-                }
-            }
-
-            //COMPARATION AND IGUALATION TO OPTIMAL DISTANCES
-            for (mitad = 0; mitad < Vertices; mitad++)
-            {
-                for (inicio = 0; inicio < Vertices; inicio++)
-                {
-                    for (final = 0; final < Vertices; final++)
-                    {
-                        if (distancia[inicio, final] > distancia[inicio, mitad] + distancia[mitad, final])
-                        {
-                            distancia[inicio, final] = distancia[inicio, mitad] + distancia[mitad, final];
-                        }
-                    }
-                }
-            }
-
-            //GRAPH RESULT PRINT
-            for (i = 0; i < Vertices; i++)
-            {
-                for (j = 0; j < Vertices; j++)
-                {
-                    if (distancia[i, j] == inf)
-                    {
-                        Console.Write("∞\t");
-                    }
-                    else
-                    {
-                        Console.Write(distancia[i, j] + "\t");
-                    }
-                }
-
-                Console.WriteLine();
-
-            }
-        }
-
-
-        public static void Rename(this FileInfo fileInfo, string newName)
-        {
-            fileInfo.MoveTo(fileInfo.Directory.FullName + "\\" + newName);
-
-        }
-
-
-
-        public static void InputProcess()
-        {
-
-            int z = 0, h = 0, i = 0, j = 0, x = 0;
-            string a, b;
-
-
-            string[] stringSeparators = new string[] { "\r\n", "," };
-
-
             string filePath = Path.GetFullPath("prueba2.txt");
 
 
             StreamReader ReadFile = new StreamReader(filePath); //TEXT READER THAT READS CHARACTERS FROM A BYTE STREAM IN A PARTICULAR ENCODING
             String FileRead = ReadFile.ReadToEnd();//READS ALL CHARACTERS FROM THE CURRENT POSITION TO THE END OF THE STREAM
-
-            //char[] AfterLim = { '\n', ',' };
-            //byte[] bytes = Encoding.Default.GetBytes(FileRead);
-            //string FileText = Encoding.UTF8.GetString(bytes);
-
-            //string[] words = FileRead.Split(AfterLim);//FILLS ONLY THE STRINGS READ BEFORE THE LINE BREAK.    
+                       
+            return FileRead;            
+        }
 
 
-            string[] words = FileRead.Split(stringSeparators, StringSplitOptions.None);
+        
+
+        public static void WeightMatrix()
+        {
+            string FileRead2 = ReadingText();
+            string[] stringSeparators = new string[] { "\r\n", "," };
+
+            int z = 0, h = 0, i = 0, j = 0, x = 0;
+            string a, b;               
+
+
+            string[] words = FileRead2.Split(stringSeparators, StringSplitOptions.None);
 
 
             while (words[z].Length != 0)//COUNT ONLY THE NODES
