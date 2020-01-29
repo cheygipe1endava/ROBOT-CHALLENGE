@@ -11,7 +11,7 @@ using System.Linq;
 namespace ROBOT_APP
 {
 
-    public static class Program
+    class Program
     {
 
         public static string ReadingText()
@@ -138,7 +138,7 @@ namespace ROBOT_APP
                 }
             }
 
-            
+
 
 
             for (i = 0; i < z; i++)//WEIGHTED MATRIX ZERO DIAGONAL
@@ -147,71 +147,106 @@ namespace ROBOT_APP
                 {
                     if (i == j)
                     {
-                        WeightMatrix[i, j] = 0;  
-                    }                        
-                }                
+                        WeightMatrix[i, j] = 0;
+                    }
+                }
             }
 
             return WeightMatrix;
 
         }
 
-        
-        private static int MinimumDistance(int[] distance, bool[] shortestPathTreeSet, int verticesCount)
-        {
-            int min = int.MaxValue;
-            int minIndex = 0;
 
-            for (int v = 0; v < verticesCount; ++v)
-            {
-                if (shortestPathTreeSet[v] == false && distance[v] <= min)
+
+
+        static int minDistance(int[] dist, bool[] sptSet, int CountVertices)
+        {
+            // Initialize min value 
+            int min = int.MaxValue, min_index = -1;
+
+            for (int v = 0; v < CountVertices; v++)
+                if (sptSet[v] == false && dist[v] <= min)
                 {
-                    min = distance[v];
-                    minIndex = v;
+                    min = dist[v];
+                    min_index = v;
                 }
-            }
 
-            return minIndex;
+            return min_index;
         }
 
-        private static void Print(int[] distance, int verticesCount)
+        // A utility function to print 
+        // the constructed distance array 
+        static void printSolution(int[] dist, int n)
         {
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Vertex    Distance from source");
-
-
-            for (int i = 0; i < verticesCount; ++i)
-                Console.WriteLine("{0}\t  {1}", i, distance[i]);
+            Console.Write("Vertex     Distance "
+                          + "from Source\n");
+            for (int i = 0; i < n; i++)
+                Console.Write(i + " \t\t " + dist[i] + "\n");
         }
 
-        public static void Dijkstra(int[,] graph, int source, int verticesCount)
+        // Function that implements Dijkstra's 
+        // single source shortest path algorithm 
+        // for a graph represented using adjacency 
+        // matrix representation 
+        static void Dijkstra(int[,] graph, int src, int ending, int CountVertices)
         {
-            int[] distance = new int[verticesCount];
-            bool[] shortestPathTreeSet = new bool[verticesCount];
+            int[] dist = new int[CountVertices]; // The output array. dist[i] 
+                                     // will hold the shortest 
+                                     // distance from src to i 
 
-            for (int i = 0; i < verticesCount; ++i)
+            // sptSet[i] will true if vertex 
+            // i is included in shortest path 
+            // tree or shortest distance from 
+            // src to i is finalized 
+            bool[] sptSet = new bool[CountVertices];
+
+            // Initialize all distances as 
+            // INFINITE and stpSet[] as false 
+            for (int i = 0; i < CountVertices; i++)
             {
-                distance[i] = int.MaxValue;
-                shortestPathTreeSet[i] = false;
+                dist[i] = int.MaxValue;
+                sptSet[i] = false;
             }
 
-            distance[source] = 0;
+            // Distance of source vertex 
+            // from itself is always 0 
+            dist[src] = 0;
 
-            for (int count = 0; count < verticesCount - 1; ++count)
+            // Find shortest path for all vertices 
+            for (int count = 0; count < CountVertices - 1; count++)
             {
-                int u = MinimumDistance(distance, shortestPathTreeSet, verticesCount);
-                shortestPathTreeSet[u] = true;
+                // Pick the minimum distance vertex 
+                // from the set of vertices not yet 
+                // processed. u is always equal to 
+                // src in first iteration. 
+                int u = minDistance(dist, sptSet, CountVertices);
 
-                for (int v = 0; v < verticesCount; ++v)
-                    if (!shortestPathTreeSet[v] && Convert.ToBoolean(graph[u, v]) && distance[u] != int.MaxValue && distance[u] + graph[u, v] < distance[v])
-                        distance[v] = distance[u] + graph[u, v];
+                // Mark the picked vertex as processed 
+                sptSet[u] = true;
+
+                // Update dist value of the adjacent 
+                // vertices of the picked vertex. 
+                for (int v = 0; v < CountVertices; v++)
+
+                    // Update dist[v] only if is not in 
+                    // sptSet, there is an edge from u 
+                    // to v, and total weight of path 
+                    // from src to v through u is smaller 
+                    // than current value of dist[v] 
+                    if (!sptSet[v] && graph[u, v] != 0 &&
+                         dist[u] != int.MaxValue && dist[u] + graph[u, v] < dist[v])
+                        dist[v] = dist[u] + graph[u, v];
             }
 
-            Print(distance, verticesCount);
+            // print the constructed distance array 
+            printSolution(dist, CountVertices);
         }
+
+
 
         public static void DijkstraImplementation()
         {
+            Console.WriteLine("\n//------------------------DIJKSTRA------------------------//\n");
             int[,] WeightCopy = WeightMatrix();
             int XLength = WeightCopy.GetLength(0);
             int YLength = WeightCopy.GetLength(1);
@@ -237,17 +272,47 @@ namespace ROBOT_APP
                 }
                 Console.WriteLine(Environment.NewLine);
             }
-            //WeightMatrix();            
-            Dijkstra(WeightCopy, 0, XLength);
+
+            Console.Write("ENTER INITIAL NODE: ");
+            string InputOption3 = Console.ReadLine();
+            int Input3 = Int32.Parse(InputOption3);
+
+            Console.Write("ENTER FINAL NODE: ");
+            string InputOption4 = Console.ReadLine();                     
+            int Input4 = Int32.Parse(InputOption4);
+
+            Dijkstra(WeightCopy, Input3, Input4, XLength);
+
         }
-    
+          
 
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("WHICH OPERATION DO YOU WANT TO EXECUTE?");
+            Console.WriteLine("1. PASS THROUGH EACH NODE FROM AN INITIAL NODE\n" +
+                "2. FIND SHORTEST PATH FROM INITIAL TO ENDING NODE\n");
+            Console.Write("ENTER OPTION: ");
+            string InputOption = Console.ReadLine();
+            int Input2 = Int32.Parse(InputOption);
 
-            DijkstraImplementation();
+            switch(Input2)
+            {
+                case 1:
+                    break;
+
+                case 2:
+                    DijkstraImplementation();
+                    break;
+
+                default:
+                    Console.WriteLine("Tu seleccion es invalida, prueba de nuevo");
+                    break;
+            }
+
+            
             Console.ReadKey();
         }
-
+        
     }
 }
