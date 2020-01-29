@@ -1,125 +1,43 @@
 ﻿using System;
 using System.Text;
 using System.Collections;
-using System.IO; //FIN THE TEXT FILE
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO; //FIND THE TEXT FILE
 using System.IO.Compression;
 using System.Linq;
 
 
 namespace ROBOT_APP
 {
+
     public static class Program
     {
-        public const int inf = 9999;
-        public const int Vertices = 4;
 
-        static void Main(string[] args)
+        public static string ReadingText()
         {
-
-            int[,] grafo =
-                    {
-                        {0, 9, inf, 10},
-                        {inf, 0, 7, inf},
-                        {14, inf, 0, 11},
-                        {inf, inf, inf, 0}
-                    };
-
-            //MetPrincipal(grafo);            
-            InputProcess();
-            Console.ReadKey();
-
-        }
-
-
-
-
-
-        static void MetPrincipal(int[,] grafo)
-        {
-            int[,] distancia = new int[Vertices, Vertices];
-            int inicio = 0;
-            int mitad = 0;
-            int final = 0;
-            int i = 0;
-            int j = 0;
-
-            //IGUALATION FOR BOTH MATRIX
-            for (i = 0; i < Vertices; i++)
-            {
-                for (j = 0; j < Vertices; j++)
-                {
-                    distancia[i, j] = grafo[i, j];
-                }
-            }
-
-            //COMPARATION AND IGUALATION TO OPTIMAL DISTANCES
-            for (mitad = 0; mitad < Vertices; mitad++)
-            {
-                for (inicio = 0; inicio < Vertices; inicio++)
-                {
-                    for (final = 0; final < Vertices; final++)
-                    {
-                        if (distancia[inicio, final] > distancia[inicio, mitad] + distancia[mitad, final])
-                        {
-                            distancia[inicio, final] = distancia[inicio, mitad] + distancia[mitad, final];
-                        }
-                    }
-                }
-            }
-
-            //GRAPH RESULT PRINT
-            for (i = 0; i < Vertices; i++)
-            {
-                for (j = 0; j < Vertices; j++)
-                {
-                    if (distancia[i, j] == inf)
-                    {
-                        Console.Write("∞\t");
-                    }
-                    else
-                    {
-                        Console.Write(distancia[i, j] + "\t");
-                    }
-                }
-
-                Console.WriteLine();
-
-            }
-        }
-
-
-        public static void Rename(this FileInfo fileInfo, string newName)
-        {
-            fileInfo.MoveTo(fileInfo.Directory.FullName + "\\" + newName);
-
-        }
-
-
-
-        public static void InputProcess()
-        {
-
-            int z = 0, h = 0, i = 0, j = 0, x = 0;
-            string a, b;
-
-
-            string[] stringSeparators = new string[] { "\r\n", "," };
-
-
             string filePath = Path.GetFullPath("prueba2.txt");
 
 
             StreamReader ReadFile = new StreamReader(filePath); //TEXT READER THAT READS CHARACTERS FROM A BYTE STREAM IN A PARTICULAR ENCODING
             String FileRead = ReadFile.ReadToEnd();//READS ALL CHARACTERS FROM THE CURRENT POSITION TO THE END OF THE STREAM
 
-            //char[] AfterLim = { '\n', ',' };
-            //byte[] bytes = Encoding.Default.GetBytes(FileRead);
-            //string FileText = Encoding.UTF8.GetString(bytes);
-
-            //string[] words = FileRead.Split(AfterLim);//FILLS ONLY THE STRINGS READ BEFORE THE LINE BREAK.    
+            return FileRead;
+        }
 
 
-            string[] words = FileRead.Split(stringSeparators, StringSplitOptions.None);
+
+
+        public static int[,] WeightMatrix()
+        {
+            string FileRead2 = ReadingText();
+            string[] stringSeparators = new string[] { "\r\n", "," };
+
+            int z = 0, h = 0, i = 0, j = 0, x = 0;
+            string a, b;
+
+
+            string[] words = FileRead2.Split(stringSeparators, StringSplitOptions.None);
 
 
             while (words[z].Length != 0)//COUNT ONLY THE NODES
@@ -160,15 +78,6 @@ namespace ROBOT_APP
                     }
                 }
             }
-
-
-            /*
-            for (h = 0; h < z3; h++)//EDGE MATRIX PRINT
-            {
-                i = 0;
-                Console.WriteLine(Edges[h, i] + Edges[h, i + 1] + Edges[h, i + 2]);
-            }
-            */
 
 
             for (h = 0; h < z; h++)
@@ -229,71 +138,116 @@ namespace ROBOT_APP
                 }
             }
 
-            for (i = 0; i < z; i++)
-            {
-                if (!NodoDisconexo.Contains(NodeList[i]))//DISCONNECTED NODES 
-                {
-                    for (j = 0; j < z; j++)
-                    {
-                        WeightMatrix[i, j] = 900;
-                        WeightMatrix[j, i] = 900;
-
-                        //Console.Write(WeightMatrix[i, j] + "\t");
-                    }
-                    //Console.WriteLine(NodeList[i] + " NO TIENE CONEXIONES");
-                }
-                else
-                {
-
-                }
-            }
+            
 
 
-            /*
-            for (i = 0; i < z; i++) 
-            {
-                Console.WriteLine(NodoDisconexo[i]);
-            }
-            */
-
-            for (i = 0; i < z; i++)//WEIGHTED MATRIX PRINT 
+            for (i = 0; i < z; i++)//WEIGHTED MATRIX ZERO DIAGONAL
             {
                 for (j = 0; j < z; j++)
                 {
                     if (i == j)
                     {
-                        WeightMatrix[i, j] = 0;
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        //Console.Write(WeightMatrix[i, j] + "\t");
+                        WeightMatrix[i, j] = 0;  
+                    }                        
+                }                
+            }
 
-                    }
-                    else if (WeightMatrix[i, j] == 0)
+            return WeightMatrix;
+
+        }
+
+        
+        private static int MinimumDistance(int[] distance, bool[] shortestPathTreeSet, int verticesCount)
+        {
+            int min = int.MaxValue;
+            int minIndex = 0;
+
+            for (int v = 0; v < verticesCount; ++v)
+            {
+                if (shortestPathTreeSet[v] == false && distance[v] <= min)
+                {
+                    min = distance[v];
+                    minIndex = v;
+                }
+            }
+
+            return minIndex;
+        }
+
+        private static void Print(int[] distance, int verticesCount)
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Vertex    Distance from source");
+
+
+            for (int i = 0; i < verticesCount; ++i)
+                Console.WriteLine("{0}\t  {1}", i, distance[i]);
+        }
+
+        public static void Dijkstra(int[,] graph, int source, int verticesCount)
+        {
+            int[] distance = new int[verticesCount];
+            bool[] shortestPathTreeSet = new bool[verticesCount];
+
+            for (int i = 0; i < verticesCount; ++i)
+            {
+                distance[i] = int.MaxValue;
+                shortestPathTreeSet[i] = false;
+            }
+
+            distance[source] = 0;
+
+            for (int count = 0; count < verticesCount - 1; ++count)
+            {
+                int u = MinimumDistance(distance, shortestPathTreeSet, verticesCount);
+                shortestPathTreeSet[u] = true;
+
+                for (int v = 0; v < verticesCount; ++v)
+                    if (!shortestPathTreeSet[v] && Convert.ToBoolean(graph[u, v]) && distance[u] != int.MaxValue && distance[u] + graph[u, v] < distance[v])
+                        distance[v] = distance[u] + graph[u, v];
+            }
+
+            Print(distance, verticesCount);
+        }
+
+        public static void DijkstraImplementation()
+        {
+            int[,] WeightCopy = WeightMatrix();
+            int XLength = WeightCopy.GetLength(0);
+            int YLength = WeightCopy.GetLength(1);
+            for (int x = 0; x < XLength; x++)
+            {
+                for (int y = 0; y < YLength; y++)
+                {
+                    if (x == y)
                     {
-                        WeightMatrix[i, j] = 800;
+                        WeightCopy[x, y] = 0;
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    else if (WeightCopy[x, y] == 0)
+                    {
                         Console.ForegroundColor = ConsoleColor.Blue;
-                        //Console.Write(WeightMatrix[i, j] + "\t");
                     }
-                    else if (WeightMatrix[i, j] == 900)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                    }
+
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                     }
-                    Console.BackgroundColor = ConsoleColor.Black;
-                    Console.Write(WeightMatrix[i, j] + "\t");
+                    Console.Write(WeightCopy[x, y] + "\t");
                 }
-                //Console.WriteLine();
                 Console.WriteLine(Environment.NewLine);
             }
-
-
-
+            //WeightMatrix();            
+            Dijkstra(WeightCopy, 0, XLength);
         }
-    }
+    
 
-        
+        static void Main(string[] args)
+        {
 
-       
+            DijkstraImplementation();
+            Console.ReadKey();
+        }
+
     }
+}
