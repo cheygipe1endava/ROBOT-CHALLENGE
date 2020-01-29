@@ -289,53 +289,8 @@ namespace ROBOT_APP
             }
 
 
-
-            //---------------------------------PRIM ALGORITHM---------------------------------------
-
-            string[] VisitedNodes = new string[z];
-<<<<<<< HEAD
-            int InputValue = Convert.ToInt32(Console.ReadLine());
-            int minvalue = 0;
-            minvalue = WeightMatrix[InputValue, 0];
-
-            for (i = 1; i < z; i++)
-            {
-
-                if (minvalue >= WeightMatrix[InputValue, i] && WeightMatrix[InputValue, i] > 0 && WeightMatrix[InputValue, i] < 800)
-                {
-                    minvalue = WeightMatrix[InputValue, i];
-=======
-            int N1 = Convert.ToInt32(Console.ReadLine());
-            int minvalue = 0; 
-            minvalue= WeightMatrix[N1,0];
-
-            for (i = 1; i < z; i++) 
-            {
-                
-                if (minvalue >= WeightMatrix[N1, i] && WeightMatrix[N1, i] > 0 && WeightMatrix[N1, i] < 800) 
-                {
-                    minvalue = WeightMatrix[N1, i];
->>>>>>> d98a38239c469cdcf2911d2806d22ad8b9524e1b
-                }
-                else
-                {
-
-                }
-
-<<<<<<< HEAD
-
-=======
-                
->>>>>>> d98a38239c469cdcf2911d2806d22ad8b9524e1b
-            }
-
-            Console.WriteLine("VALOR MINIMO: " + minvalue);
-
         }
-
     }
-
-
         
 
        
