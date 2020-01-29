@@ -294,11 +294,10 @@ namespace APLICACION_ROBOT
 
             //---------------------------------PRIM ALGORITHM---------------------------------------
 
-            int MinValue = 0, TotalWeight = 0, NodeCount = 1;
+            int MinValue = 0, TotalWeight = 0, NodeCount = 1, LastPositionNode = 0;
             int InputNode = Convert.ToInt32(Console.ReadLine());
-            int[] VisitedNodes = new int[z * 2];
-
-            for (i = 0; i < z * 2; i++)
+            int[] VisitedNodes = new int[z];            
+            for (i = 0; i < z; i++)
             {
                 VisitedNodes[i] = int.MinValue;
             }
@@ -321,9 +320,48 @@ namespace APLICACION_ROBOT
 
             while (NodeList2 != Intersection)
             {
-                if (VisitedNodes.Any(r => r > 0))
+                if (VisitedNodes.Any(r => r > 0))//IF VisitedNodes HAVE AT LEAST ONE POSITIVE, RUN FROM PREVIOUS POSITION
                 {
+                    for (i = 0; i < z; i++)
+                    {
 
+                        if (MinValue > WeightMatrix[LastPositionNode, i] && WeightMatrix[LastPositionNode, i] > 0)
+                        {
+                            MinValue = WeightMatrix[LastPositionNode, i];
+                            VisitedNodes[NodeCount] = i;
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    TotalWeight = TotalWeight + MinValue;
+                    NodeCount++;
+                    MinValue = int.MaxValue;
+
+                    for (j = 0; j < z; j++)
+                    {
+                        if (MinValue > WeightMatrix[j, VisitedNodes[NodeCount - 1]] && WeightMatrix[j, VisitedNodes[NodeCount - 1]] > 0)
+                        {
+                            if (!VisitedNodes.Contains(j))
+                            {
+                                MinValue = WeightMatrix[j, VisitedNodes[NodeCount - 1]];
+                                VisitedNodes[NodeCount] = j;
+                                LastPositionNode = j;
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    TotalWeight = TotalWeight + MinValue;
+                    NodeCount++;
+                    MinValue = int.MaxValue;
                 }
                 else//IF THERE'S NOT ANY POSITIVE NUMBERS IN VisitedNodes, START RUNNING FROM CERO
                 {
@@ -353,6 +391,7 @@ namespace APLICACION_ROBOT
                             {
                                 MinValue = WeightMatrix[j, VisitedNodes[NodeCount - 1]];
                                 VisitedNodes[NodeCount] = j;
+                                LastPositionNode = j;
                             }
                             else
                             {
