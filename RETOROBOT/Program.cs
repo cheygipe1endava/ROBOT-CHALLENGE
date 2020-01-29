@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO; //FIND THE TEXT FILE
 using System.IO.Compression;
 using System.Linq;
@@ -8,9 +10,10 @@ using System.Linq;
 
 namespace ROBOT_APP
 {
+
     public static class Program
     {
-        
+        /*
 
         static void Main(string[] args)
         {
@@ -86,16 +89,7 @@ namespace ROBOT_APP
 
                     }
                 }
-            }
-
-
-            /*
-            for (h = 0; h < z3; h++)//EDGE MATRIX PRINT
-            {
-                i = 0;
-                Console.WriteLine(Edges[h, i] + Edges[h, i + 1] + Edges[h, i + 2]);
-            }
-            */
+            }            
 
 
             for (h = 0; h < z; h++)
@@ -175,14 +169,7 @@ namespace ROBOT_APP
                 }
             }
 
-
-            /*
-            for (i = 0; i < z; i++) 
-            {
-                Console.WriteLine(NodoDisconexo[i]);
-            }
-            */
-
+            
             for (i = 0; i < z; i++)//WEIGHTED MATRIX PRINT 
             {
                 for (j = 0; j < z; j++)
@@ -217,8 +204,76 @@ namespace ROBOT_APP
 
 
         }
-    }
-        
+    
+     */
 
-       
+        private static int MinimumDistance(int[] distance, bool[] shortestPathTreeSet, int verticesCount)
+        {
+            int min = int.MaxValue;
+            int minIndex = 0;
+
+            for (int v = 0; v < verticesCount; ++v)
+            {
+                if (shortestPathTreeSet[v] == false && distance[v] <= min)
+                {
+                    min = distance[v];
+                    minIndex = v;
+                }
+            }
+
+            return minIndex;
+        }
+
+        private static void Print(int[] distance, int verticesCount)
+        {
+            Console.WriteLine("Vertex    Distance from source");
+
+            for (int i = 0; i < verticesCount; ++i)
+                Console.WriteLine("{0}\t  {1}", i, distance[i]);
+        }
+
+        public static void DijkstraAlgo(int[,] graph, int source, int verticesCount)
+        {
+            int[] distance = new int[verticesCount];
+            bool[] shortestPathTreeSet = new bool[verticesCount];
+
+            for (int i = 0; i < verticesCount; ++i)
+            {
+                distance[i] = int.MaxValue;
+                shortestPathTreeSet[i] = false;
+            }
+
+            distance[source] = 0;
+
+            for (int count = 0; count < verticesCount - 1; ++count)
+            {
+                int u = MinimumDistance(distance, shortestPathTreeSet, verticesCount);
+                shortestPathTreeSet[u] = true;
+
+                for (int v = 0; v < verticesCount; ++v)
+                    if (!shortestPathTreeSet[v] && Convert.ToBoolean(graph[u, v]) && distance[u] != int.MaxValue && distance[u] + graph[u, v] < distance[v])
+                        distance[v] = distance[u] + graph[u, v];
+            }
+
+            Print(distance, verticesCount);
+        }
+
+        static void Main(string[] args)
+        {
+            int[,] graph =  {
+                         { 0,2,0,4,7,0,0,0 },
+                         { 2,0,4,0,0,0,0,0},
+                         { 0,4,0,2,0,5,0,0},
+                         { 4,0,2,0,0,0,0,0},
+                         { 7,0,0,0,0,0,0,0},
+                         { 0,0,5,0,0,0,0,5},
+                         { 0,0,0,0,0,0,0,0},
+                         { 0,0,0,0,0,5,0,0}
+                            };
+
+            DijkstraAlgo(graph, 0, 8);
+        }
+
     }
+}
+    
